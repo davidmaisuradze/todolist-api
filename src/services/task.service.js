@@ -10,7 +10,7 @@ export const getTasks = async () => {
     }
 };
 
-export const createTask = async (data, currentuserId) => {
+export const createTask = async (data, currentUserId) => {
     try {
         const checkTask = await Task.findOne({title: data.title});
         if (checkTask) {
@@ -23,7 +23,7 @@ export const createTask = async (data, currentuserId) => {
             description: data.description,
             dueDate: data.dueDate,
             status: data.status,
-            userId: currentuserId
+            userId: currentUserId
         });
 
         // save Task
