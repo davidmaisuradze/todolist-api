@@ -15,6 +15,7 @@ routes.post('/', authenticate, validate(validators.createTask), TasksController.
 
 // PUT
 routes.put('/', authenticate, validate(validators.updateTask), TasksController.updateTask);
+routes.put('/assignTask', authenticate, validate(validators.assignTask), TasksController.assignTaskToUser);
 
 // DELETE
 routes.delete('/:taskId', authenticate, validate(validators.deleteTask), TasksController.deleteTask);

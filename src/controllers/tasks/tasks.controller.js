@@ -1,7 +1,7 @@
 import * as taskService from '../../services/task.service';
 
 export const getTasks = async (req, res, next) => {
-    const result = await taskService.getTasks();
+    const result = await taskService.getTasks(req.currentUser._id);
     return res.status(result.status).json(result.data);
 };
 
@@ -12,6 +12,11 @@ export const createTask = async (req, res, next) => {
 
 export const updateTask = async (req, res, next) => {
     const result = await taskService.updateTask(req.body, req.currentUser._id);
+    return res.status(result.status).json(result.data);
+};
+
+export const assignTaskToUser = async (req, res, next) => {
+    const result = await taskService.assignTaskToUser(req.body);
     return res.status(result.status).json(result.data);
 };
 

@@ -1,6 +1,11 @@
 import HttpStatus from 'http-status';
 import * as authService from '../../services/auth.service';
 
+export const getUsers = async (req, res, next) => {
+    const result = await authService.getUsers(req.currentUser._id);
+    return res.status(result.status).json(result.data);
+};
+
 export const login = async (req, res, next) => {
     const {email, password} = req.body;
 

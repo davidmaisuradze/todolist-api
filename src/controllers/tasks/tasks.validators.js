@@ -18,6 +18,12 @@ export default {
             status: Joi.string().max(50).required()
         }
     },
+    assignTask: {
+        body: {
+            taskId: Joi.string().required(),
+            assigneeId: Joi.string().required()
+        }
+    },
     deleteTask: {
         params: {
             taskId: Joi.string()

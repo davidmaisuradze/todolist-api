@@ -8,6 +8,7 @@ import authenticate from "../middlewares/authenticate";
 const routes = new Router();
 
 // GET
+routes.get('/', authenticate, AuthController.getUsers);
 routes.get('/currentUser', authenticate, AuthController.getCurrentUser);
 
 // POST

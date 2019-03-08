@@ -2,11 +2,14 @@ import mongoose from 'mongoose';
 import bcrypt from 'bcrypt-nodejs';
 import jwt from 'jsonwebtoken';
 
-const userSchema = new mongoose.Schema({
+const Schema = mongoose.Schema;
+
+const userSchema = new Schema({
     email: {type: String, required: true, unique: true},
     passwordHash: {type: String, required: true},
     firstName: {type: String, required: true},
-    lastName: {type: String, required: true}
+    lastName: {type: String, required: true},
+    tasks: [{type: Schema.Types.ObjectId}],
 }, {timestamps: true});
 
 userSchema.methods.isValidPassword = function isValidPassword(password) {
