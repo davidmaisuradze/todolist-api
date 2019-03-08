@@ -1,19 +1,11 @@
 import User from '../../models/user.model';
 import HttpStatus from 'http-status';
+import * as authService from '../../services/auth.service';
 
 export const login = async (req, res, next) => {
-    try {
-        const {email, password} = req.body;
-        const user = await User.findOne({email: email});
+    const {email, password} = req.body;
 
-        if (user && user.isValidPassword(password)) {
-            return res.status(HttpStatus.OK).json(user.toAuthJSON());
-        } else {
-            return res.status(HttpStatus.BAD_REQUEST).json('Invalid credentials');
-        }
-    } catch (err) {
-        return res.status(HttpStatus.BAD_REQUEST).json(err);
-    }
+    return await authService.loginUser(res, email, password);
 };
 
 export const register = async (req, res, next) => {
