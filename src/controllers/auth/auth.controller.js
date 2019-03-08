@@ -1,4 +1,3 @@
-import User from '../../models/user.model';
 import HttpStatus from 'http-status';
 import * as authService from '../../services/auth.service';
 
@@ -10,21 +9,8 @@ export const login = async (req, res, next) => {
 };
 
 export const register = async (req, res, next) => {
-    try {
-        const data = req.body;
-
-        const user = new User({
-            email: data.email,
-            firstName: data.firstName,
-            lastName: data.lastName
-        });
-        user.generatePasswordHash(data.password);
-        const result = await user.save();
-
-        return res.json(result.toAuthJSON());
-    } catch (err) {
-        return res.status(HttpStatus.BAD_REQUEST).json(err);
-    }
+    const result = await authService.register(req.body);
+    return res.status(result.status).json(result.data);
 };
 
 export const getCurrentUser = async (req, res, next) => {
